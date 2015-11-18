@@ -1,0 +1,17 @@
+[
+  ["montante", "idade", "salario", "conta", "emprestimo"],
+  ["médio",    "senior","baixo",   "sim",   "nao"],
+  ["médio",    "senior","baixo",   "nao",   "nao"],
+  ["baixo",    "senior","baixo",   "sim",   "sim"],
+  ["alto",     "media", "baixo",   "sim",   "sim"],
+  ["alto",     "jovem", "alto",    "nao",   "nao"],
+  ["alto",     "jovem", "alto",    "sim",   "sim"],
+  ["baixo",    "jovem", "alto",    "nao",   "sim"],
+  ["médio",    "media", "baixo",   "sim",   "nao"],
+  ["alto",     "jovem", "alto",    "sim",   "sim"],
+  ["médio",    "media", "alto",    "sim",   "sim"],
+  ["médio",    "media", "alto",    "nao",   "sim"],
+  ["baixo",    "jovem", "baixo",   "nao",   "sim"],
+  ["baixo",    "senior","alto",    "sim",   "sim"],
+  ["alto",     "media", "baixo",   "nao",   "nao"]
+]
