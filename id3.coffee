@@ -155,12 +155,12 @@ class ID3 extends BaseTree
   #
   # @param n - the current level
   #
-  print: (n=0) ->
-    console.log ('\t' for i in [0..n]).join(''), @attr
-
-    for i in [0...@values.length]
-      try
-        console.log ('\t' for i in [0..n]).join(''), '  ', @values[i]
-        @children[i].print n + 1
-      catch
-        continue
+  # print: (n=0) ->
+  #   console.log ('\t' for i in [0..n]).join(''), @attr
+  #
+  #   for i in [0...@values.length]
+  #     try
+  #       console.log ('\t' for i in [0..n]).join(''), '  ', @values[i]
+  #       @children[i].print n + 1
+  #     catch
+  #       continue
