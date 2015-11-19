@@ -12,6 +12,7 @@ class ID3 extends BaseTree
   # @param classname - the class attribute of the training set
   #
   constructor: (@table, @classname) ->
+    super(null, null)
 
   #
   # Returns a list of values of a column
@@ -104,3 +105,62 @@ class ID3 extends BaseTree
       entropy -= Math.log(p)*p/Math.log(2)
 
     entropy
+
+  #
+  # Split the learning set for each value of attribute
+  #
+  # @param attr - a attribute in the learning set
+  #
+  segregate: (attr) ->
+    values = @unique_values attr
+    tables = {}
+
+    for i in values
+      t = []
+      t.push(j for j in @table[0] when j != attr)
+
+      for j in @table[1..]
+        value_index = @table[0].indexOf attr
+        if j[value_index] == i
+          t.push(j[k] for k in [0...j.length] when k != value_index)
+
+      tables[i] = t
+
+    tables
+
+  #
+  # Creates a ID3 tree for a table
+  #
+  # @param table - a list of lists with the first line
+  #                as the attributes names, and the others
+  #                as values
+  # @param classname - the class attribute to use
+  #
+  @build: (table, classname) ->
+    tree = new ID3 table, classname
+
+    if 0 in (i.length for i in table)
+      return undefined
+
+    tree.attr = tree.better_attr()
+    subtable = tree.segregate tree.attr
+
+    for v, t of subtable
+      tree.add_child(ID3.build(t, classname), v)
+
+    tree
+
+  #
+  # Print the idented tree
+  #
+  # @param n - the current level
+  #
+  print: (n=0) ->
+    console.log ('\t' for i in [0..n]).join(''), @attr
+
+    for i in [0...@values.length]
+      try
+        console.log ('\t' for i in [0..n]).join(''), '  ', @values[i]
+        @children[i].print n + 1
+      catch
+        continue
