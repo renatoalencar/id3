@@ -139,8 +139,9 @@ class ID3 extends BaseTree
   @build: (table, classname) ->
     tree = new ID3 table, classname
 
-    if 0 in (i.length for i in table)
-      return undefined
+    if tree.unique_values(classname).length == 1
+      tree.attr = tree.unique_values(classname)[0]
+      return tree
 
     tree.attr = tree.better_attr()
     subtable = tree.segregate tree.attr
@@ -155,12 +156,9 @@ class ID3 extends BaseTree
   #
   # @param n - the current level
   #
-  # print: (n=0) ->
-  #   console.log ('\t' for i in [0..n]).join(''), @attr
-  #
-  #   for i in [0...@values.length]
-  #     try
-  #       console.log ('\t' for i in [0..n]).join(''), '  ', @values[i]
-  #       @children[i].print n + 1
-  #     catch
-  #       continue
+  print: (n=0) ->
+    console.log ('\t' for i in [0..n]).join(''), @attr
+
+    for i in [0...@values.length]
+        console.log ('\t' for i in [0..n]).join(''), '  ', @values[i]
+        @children[i].print n + 1
